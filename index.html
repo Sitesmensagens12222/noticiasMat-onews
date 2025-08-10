@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Notícia URGENTE - Matão News</title>
+  <style>
+    :root{
+      --bg:#0f1724;
+      --card:#0b1320;
+      --accent:#ff3b30;
+      --muted:#9aa4b2;
+      --glass: rgba(255,255,255,0.03);
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background: linear-gradient(180deg, #071029 0%, #0b1630 100%);
+      color:#e6eef6;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+    }
+    .container{
+      width:100%;
+      max-width:860px;
+    }
+    header{
+      display:flex;
+      align-items:center;
+      gap:16px;
+      margin-bottom:18px;
+    }
+    .badge{
+      background:var(--accent);
+      color:white;
+      padding:8px 12px;
+      border-radius:999px;
+      font-weight:700;
+      letter-spacing:0.6px;
+      box-shadow: 0 6px 18px rgba(255,59,48,0.18);
+    }
+    .title{
+      font-size:20px;
+      line-height:1.1;
+      margin:0;
+    }
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:12px;
+      padding:18px;
+      box-shadow: 0 8px 30px rgba(2,6,23,0.6);
+      border: 1px solid rgba(255,255,255,0.03);
+    }
+    .hero{
+      display:flex;
+      gap:18px;
+      align-items:flex-start;
+      flex-wrap:wrap;
+    }
+    .hero img{
+      width:260px;
+      height:260px;
+      object-fit:cover;
+      border-radius:10px;
+      border: 1px solid var(--glass);
+      background: linear-gradient(45deg,#0b1220,#081022);
+    }
+    .content{
+      flex:1;
+      min-width:240px;
+    }
+    h1{
+      margin:0 0 8px 0;
+      font-size:26px;
+    }
+    p.lead{
+      margin:0 0 12px 0;
+      color:var(--muted);
+    }
+    .meta{
+      font-size:13px;
+      color:var(--muted);
+      margin-bottom:14px;
+    }
+    .actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .btn{
+      display:inline-block;
+      padding:10px 14px;
+      border-radius:8px;
+      text-decoration:none;
+      font-weight:600;
+      cursor:pointer;
+      border: none;
+    }
+    .btn.primary{
+      background:var(--accent);
+      color:white;
+      box-shadow: 0 6px 18px rgba(255,59,48,0.12);
+    }
+    .btn.ghost{
+      background:transparent;
+      color:var(--muted);
+      border:1px solid rgba(255,255,255,0.04);
+    }
+    footer{
+      margin-top:14px;
+      font-size:12px;
+      color:var(--muted);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+    }
+    @media (max-width:700px){
+      .hero img{ width:100%; height:220px; }
+      h1{ font-size:20px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="badge">URGENTE</div>
+      <div>
+        <p class="title">Matão News — manchete em destaque</p>
+        <div style="font-size:12px;color:var(--muted)">Portal local — notícias e atualizações</div>
+      </div>
+    </header>
+
+    <article class="card" role="article" aria-labelledby="main-heading">
+      <div class="hero">
+        <img src="https://i.imgur.com/eqK4V5d.jpeg" alt="Foto do homem mais bonito segundo Matão News">
+        <div class="content">
+          <h1 id="main-heading">NOTÍCIA URGENTE: Foi registrado O homem mais bonito</h1>
+          <p class="lead">De acordo com o Matão News, foi registrado hoje o homem mais bonito — confira detalhes e reações em primeira mão.</p>
+          <div class="meta" id="time">Publicado em: <span id="publishedAt">--</span></div>
+
+          <p>Matão News traz a cobertura completa sobre o registro que vem causando repercussão nas redes sociais locais. Fontes afirmam que a identificação foi feita após votação popular e avaliada por especialistas em carisma e simpatia.</p>
+
+          <div class="actions" role="group" aria-label="Ações da notícia">
+            <a class="btn primary" href="#" onclick="alert('Link de leitura completo (exemplo).')">Ler matéria completa</a>
+            <a class="btn ghost" href="https://matãonews.example.com" target="_blank" rel="noopener">Visitar Matão News</a>
+          </div>
+
+          <footer>
+            <div>Autor: Redação Matão News</div>
+            <div>Compartilhar:
+              <button class="btn ghost" onclick="share()">Compartilhar</button>
+            </div>
+          </footer>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <script>
+    const now = new Date();
+    const opts = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute:'2-digit' };
+    document.getElementById('publishedAt').textContent = now.toLocaleString('pt-BR', opts);
+
+    function share(){
+      const shareData = {
+        title: 'NOTÍCIA URGENTE - Matão News',
+        text: 'Veja: Notícia URGENTE — Foi registrado O homem mais bonito (Matão News)',
+        url: window.location.href
+      };
+      if (navigator.share){
+        navigator.share(shareData).catch(()=>{});
+      } else {
+        navigator.clipboard?.writeText(`${shareData.title}\n${shareData.text}\n${shareData.url}`)
+          .then(()=> alert('Link copiado para a área de transferência.'))
+          .catch(()=> alert('Não foi possível copiar — compartilhe manualmente.'));
+      }
+    }
+  </script>
+</body>
+</html>
